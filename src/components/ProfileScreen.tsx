@@ -15,7 +15,7 @@ export default function ProfileScreen() {
             <img 
               alt="User Profile" 
               className="w-full h-full rounded-full object-cover" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzvytcifOR6LD5VHBOAi9a1oRjnGcKF-gZtUokeiFCrU87l3LYHJkJqZo7n9K3PkttKTMcAJNoXcrzixxddyMeVnskYneazpzOdaepYFNoVP1AmgTPlhiZaURr4uqCOBlVmSW1yODnWm9tj3yLsGBgXWq6LJVpFJT8ep3yCFEbZDsmcKU41RWsFbaoBThFVXW4NE3dDwRn77qWuBpiUj08zGQqBrX3cRD1WPFk6FVygwIM_oACvJMGf_cE6OeTzQdZttd8O4IYdZQ" 
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200" 
               referrerPolicy="no-referrer"
             />
           </div>

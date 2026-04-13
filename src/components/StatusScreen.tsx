@@ -25,7 +25,7 @@ export default function StatusScreen({ onStartCharging, onOpenSettings, onFindSt
         <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden group shadow-2xl">
           <img 
             className="w-full h-full object-cover transform scale-110 -translate-x-4" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJOtxV_eFH9nsIm0yV0bbvXpWN8apPvKz7V-l3fXSWYjeSGUArtN4y62Jm2Ocf9t6bj2-DOYKRMdvEkDymk3sAiRWN76MC1mT2ivamNdC2Hojkgttoi7aGRStDbLfNLweakKdCyUxeKnEv8-dyx-m75zVk6g1yDH8dhF-kOvLxQKrB7U7t8j-23gNs7PKS1UYTiqNn_-9kTmeKJ2qZcSrsTtS8e7J-4j-cVRemCs4Lk0yYrkkGqMtHj1b8D6k-QQi7Dr7slNLxzh0" 
+            src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=1000" 
             alt="Vehicle"
             referrerPolicy="no-referrer"
           />

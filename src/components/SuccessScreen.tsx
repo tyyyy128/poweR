@@ -61,7 +61,7 @@ export default function SuccessScreen({ onDone }: SuccessScreenProps) {
       <div className="rounded-3xl overflow-hidden aspect-[16/10] bg-surface-container relative shadow-sm border border-outline-variant/5">
         <img 
           className="w-full h-full object-cover opacity-80" 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAGtXygJLXtlr3LtDAMZ7SdD7nl9th6QP8YZwkp1BDcsMzn5Lkp8iU-ipsn5Q4uuELEPbsZ88-A4STVZRm19Ob4auNKZZQYvu-82sGi96NLlgoGBrqF9kcNkPghzE99_Qv57r1FQP1MKd1mvJ-fNgdDiI0eIdFBbqwtMC0BMYB-FutWz4a2ohHwSM6kqOZLA46CeLJv5SSREWe1W0O2TLXtA4QmUuFr7BMtQHsb5Q_z5Qs3sOGH_O4XB3tr6OQGxy-y3q904hDfjM" 
+          src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1000" 
           alt="Sustainability"
           referrerPolicy="no-referrer"
         />
