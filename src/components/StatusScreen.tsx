@@ -25,7 +25,7 @@ export default function StatusScreen({ onStartCharging, onOpenSettings, onFindSt
         <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden group shadow-2xl">
           <img 
             className="w-full h-full object-cover transform scale-110 -translate-x-4" 
-            src="https://inews.gtimg.com/newsapp_bt/0/13973037476/1000" 
+            src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=1000" 
             alt="高级接驳车"
             referrerPolicy="no-referrer"
           />
