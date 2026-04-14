@@ -1,116 +1,171 @@
 import { motion } from "motion/react";
-import { Battery, MapPin, Zap, Settings as SettingsIcon, ChevronRight } from "lucide-react";
+import { Zap, BatteryCharging, Snowflake, Gauge, Clock } from "lucide-react";
+import React, { useState } from "react";
 
-interface StatusScreenProps {
-  onStartCharging: () => void;
-  onOpenSettings: () => void;
-  onFindStation: () => void;
+interface SettingsScreenProps {
+  onConfirm: () => void;
 }
 
-export default function StatusScreen({ onStartCharging, onOpenSettings, onFindStation }: StatusScreenProps) {
+export default function SettingsScreen({ onConfirm }: SettingsScreenProps) {
+  const [chargeLimit, setChargeLimit] = useState(85);
+  const [optimizedBattery, setOptimizedBattery] = useState(true);
+  const [precondition, setPrecondition] = useState(false);
+  const [selectedHour, setSelectedHour] = useState(1);
+  const [selectedMinute, setSelectedMinute] = useState(20);
+
+  const hours = Array.from({ length: 13 }, (_, i) => i);
+  const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>, type: 'h' | 'm') => {
+    const container = e.currentTarget;
+    const scrollPos = container.scrollTop;
+    const itemHeight = 48; // h-12
+    const index = Math.round(scrollPos / itemHeight);
+    
+    if (type === 'h') {
+      if (hours[index] !== undefined) setSelectedHour(hours[index]);
+    } else {
+      if (minutes[index] !== undefined) setSelectedMinute(minutes[index]);
+    }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
       className="space-y-8"
     >
-      <section className="relative">
-        <div className="absolute -top-4 -left-4 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-        <div className="flex flex-col items-start">
-          <span className="text-[10px] text-on-surface-variant font-bold tracking-widest mb-1 px-1 uppercase">CONNECTED</span>
-          <h1 className="text-4xl font-extrabold tracking-tighter text-on-surface mb-6">车辆已就绪</h1>
+      <section>
+        <h1 className="text-3xl font-extrabold tracking-tight text-on-surface mb-2">充电设置</h1>
+        <p className="text-on-surface-variant font-medium text-sm">配置您的车辆能量摄入精度。</p>
+      </section>
+
+      <div className="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_12px_32px_rgba(26,27,31,0.06)] flex items-center justify-between border border-outline-variant/10">
+        <div className="space-y-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-primary">时间预测</span>
+          <h2 className="text-xl font-bold text-on-surface">预计充满：{selectedHour}h {selectedMinute}m</h2>
         </div>
-        
-        <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden group shadow-2xl">
-          <img 
-            className="w-full h-full object-cover transform scale-110 -translate-x-4" 
-            src="https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&q=80&w=1000" 
-            alt="Shuttle Bus"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+          <Clock className="w-6 h-6 fill-primary/20" />
+        </div>
+      </div>
+
+      <section className="space-y-4">
+        <div className="flex items-baseline justify-between">
+          <h3 className="text-lg font-bold tracking-tight">手动定时器</h3>
+          <span className="text-[10px] font-bold text-on-surface-variant bg-surface-container-high px-3 py-1 rounded-full uppercase tracking-wider">持续时间</span>
+        </div>
+        <div className="relative bg-surface-container-low rounded-3xl overflow-hidden h-48 flex items-center justify-center border border-outline-variant/5">
+          {/* Selection Highlight */}
+          <div className="absolute inset-x-0 h-12 bg-surface-container-highest/50 border-y border-outline-variant/10 pointer-events-none z-10"></div>
           
-          <div className="absolute bottom-6 left-6 right-6 p-5 glass-effect rounded-2xl flex justify-between items-center shadow-lg border border-white/20">
-            <div className="space-y-1">
-              <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">MODEL K-2</p>
-              <p className="text-sm font-semibold text-primary">所有系统正常</p>
+          <div className="flex w-full items-center justify-center gap-8 wheel-mask h-full">
+            {/* Hours Wheel */}
+            <div className="relative flex items-center gap-2 h-full">
+              <div 
+                onScroll={(e) => handleScroll(e, 'h')}
+                className="flex flex-col items-center overflow-y-auto h-full no-scrollbar snap-y snap-mandatory py-20 px-4 scroll-smooth"
+              >
+                {hours.map((h) => (
+                  <div 
+                    key={h}
+                    className={`h-12 w-12 flex items-center justify-center snap-center transition-all duration-200 ${selectedHour === h ? 'text-on-surface font-bold text-2xl scale-110' : 'text-on-surface-variant/40 font-medium scale-90'}`}
+                  >
+                    {h}
+                  </div>
+                ))}
+              </div>
+              <span className="text-lg font-bold text-on-surface-variant">h</span>
             </div>
-            <div className="flex items-center gap-2 bg-primary/10 px-3 py-1.5 rounded-full">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-              <span className="text-[11px] font-bold text-primary tracking-tighter">实时</span>
+
+            {/* Minutes Wheel */}
+            <div className="relative flex items-center gap-2 h-full">
+              <div 
+                onScroll={(e) => handleScroll(e, 'm')}
+                className="flex flex-col items-center overflow-y-auto h-full no-scrollbar snap-y snap-mandatory py-20 px-4 scroll-smooth"
+              >
+                {minutes.map((m) => (
+                  <div 
+                    key={m}
+                    className={`h-12 w-12 flex items-center justify-center snap-center transition-all duration-200 ${selectedMinute === m ? 'text-on-surface font-bold text-2xl scale-110' : 'text-on-surface-variant/40 font-medium scale-90'}`}
+                  >
+                    {m}
+                  </div>
+                ))}
+              </div>
+              <span className="text-lg font-bold text-on-surface-variant">m</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* One-click Find Station Button */}
+      <section className="bg-surface-container-low rounded-3xl p-2 space-y-1 shadow-sm border border-outline-variant/5">
+        <div className="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl">
+          <div className="flex items-center gap-3">
+            <BatteryCharging className="text-secondary w-5 h-5" />
+            <span className="font-semibold text-on-surface text-sm">优化电池老化</span>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input 
+              type="checkbox" 
+              className="sr-only ios-switch" 
+              checked={optimizedBattery}
+              onChange={() => setOptimizedBattery(!optimizedBattery)}
+            />
+            <div className="ios-switch-label w-11 h-6 bg-surface-container-highest rounded-full transition-colors duration-200 ease-in-out after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-transform after:duration-200"></div>
+          </label>
+        </div>
+
+        <div className="p-6 bg-surface-container-lowest rounded-2xl space-y-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <Gauge className="text-secondary w-5 h-5" />
+              <span className="font-semibold text-on-surface text-sm">充电上限</span>
+            </div>
+            <span className="text-primary font-bold">{chargeLimit}%</span>
+          </div>
+          <div className="relative w-full h-2 bg-surface-container-highest rounded-full">
+            <div className="absolute h-full bg-secondary rounded-full" style={{ width: `${chargeLimit}%` }}></div>
+            <input 
+              type="range" 
+              min="50" 
+              max="100" 
+              value={chargeLimit} 
+              onChange={(e) => setChargeLimit(parseInt(e.target.value))}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            />
+            <div 
+              className="absolute w-6 h-6 bg-white border-2 border-secondary shadow-lg rounded-full top-1/2 -translate-y-1/2 -ml-3 pointer-events-none" 
+              style={{ left: `${chargeLimit}%` }}
+            ></div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl">
+          <div className="flex items-center gap-3">
+            <Snowflake className="text-secondary w-5 h-5" />
+            <span className="font-semibold text-on-surface text-sm">预调节座舱</span>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input 
+              type="checkbox" 
+              className="sr-only ios-switch" 
+              checked={precondition}
+              onChange={() => setPrecondition(!precondition)}
+            />
+            <div className="ios-switch-label w-11 h-6 bg-surface-container-highest rounded-full transition-colors duration-200 ease-in-out after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-transform after:duration-200"></div>
+          </label>
+        </div>
+      </section>
+
       <button 
-        onClick={onFindStation}
-        className="w-full bg-surface-container-low p-6 rounded-[2rem] flex items-center justify-between border border-outline-variant/5 shadow-sm active:scale-[0.98] transition-all"
+        onClick={onConfirm}
+        className="w-full h-16 bg-gradient-to-br from-primary to-primary-container text-white rounded-3xl font-bold text-lg shadow-[0_12px_32px_rgba(0,107,39,0.2)] active:scale-95 transition-transform duration-200 flex items-center justify-center gap-2"
       >
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
-            <MapPin className="w-6 h-6" />
-          </div>
-          <div className="text-left">
-            <h3 className="font-bold text-on-surface">一键找桩</h3>
-            <p className="text-xs text-on-surface-variant">发现附近空闲车位与充电桩</p>
-          </div>
-        </div>
-        <ChevronRight className="text-outline-variant w-5 h-5" />
+        确认并开始
+        <Zap className="w-5 h-5 fill-white" />
       </button>
-
-      <section className="grid grid-cols-2 gap-4">
-        <div className="bg-surface-container-low p-6 rounded-[2rem] flex flex-col justify-between aspect-square shadow-sm">
-          <Battery className="text-secondary w-8 h-8" />
-          <div>
-            <h2 className="text-4xl font-extrabold tracking-tight">65<span className="text-xl font-medium opacity-40">%</span></h2>
-            <p className="text-sm font-medium text-on-surface-variant">当前电量</p>
-          </div>
-        </div>
-        <div className="bg-surface-container-low p-6 rounded-[2rem] flex flex-col justify-between aspect-square shadow-sm">
-          <MapPin className="text-primary w-8 h-8" />
-          <div>
-            <h2 className="text-4xl font-extrabold tracking-tight">280<span className="text-xl font-medium opacity-40">km</span></h2>
-            <p className="text-sm font-medium text-on-surface-variant">剩余续航</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-surface-container-lowest p-8 rounded-[2.5rem] shadow-[0_12px_32px_rgba(26,27,31,0.04)] space-y-6 border border-outline-variant/10">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold tracking-tight">开始充电</h3>
-          <Zap className="text-on-surface-variant w-5 h-5" />
-        </div>
-        <p className="text-on-surface-variant leading-relaxed text-sm">
-          已连接至 <span className="font-semibold text-on-surface">聚农智充站 #08</span>。准备好使用可持续能源为您的车辆补充能量。
-        </p>
-        <div className="space-y-3">
-          <button 
-            onClick={onStartCharging}
-            className="kinetic-gradient w-full py-5 rounded-full text-white font-bold text-lg shadow-[0_12px_32px_rgba(0,107,39,0.25)] active:scale-95 transition-transform"
-          >
-            确认并开始充电
-          </button>
-          <button 
-            onClick={onOpenSettings}
-            className="w-full py-5 rounded-full bg-surface-container-highest text-secondary font-bold text-lg active:scale-95 transition-transform"
-          >
-            充电设置
-          </button>
-        </div>
-      </section>
-
-      <section className="flex justify-center items-center gap-6 px-4 pb-4">
-        <div className="flex items-center gap-1.5 opacity-50">
-          <span className="text-xs font-medium">21°C 车内温度</span>
-        </div>
-        <div className="w-1 h-1 rounded-full bg-outline-variant"></div>
-        <div className="flex items-center gap-1.5 opacity-50">
-          <span className="text-xs font-medium">已解锁</span>
-        </div>
-      </section>
     </motion.div>
   );
 }
