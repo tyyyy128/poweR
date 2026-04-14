@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Zap, Antenna, Thermometer, Activity, CheckCircle2, Radio } from "lucide-react";
 
@@ -6,6 +7,33 @@ interface ChargingScreenProps {
 }
 
 export default function ChargingScreen({ onStop }: ChargingScreenProps) {
+  const [displayProgress, setDisplayProgress] = useState(65);
+
+  useEffect(() => {
+    const duration = 2500; // 2.5 seconds
+    const start = 65;
+    const end = 82;
+    const startTime = performance.now();
+
+    const animateProgress = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // easeOutQuart
+      const easedProgress = 1 - Math.pow(1 - progress, 4);
+      const currentVal = Math.floor(start + (end - start) * easedProgress);
+      
+      setDisplayProgress(currentVal);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateProgress);
+      }
+    };
+
+    const animationFrame = requestAnimationFrame(animateProgress);
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
@@ -31,9 +59,9 @@ export default function ChargingScreen({ onStop }: ChargingScreenProps) {
               strokeWidth="12" 
             />
             <motion.circle 
-              initial={{ strokeDashoffset: 691 }}
-              animate={{ strokeDashoffset: 124 }}
-              transition={{ duration: 2, ease: "easeOut" }}
+              initial={{ strokeDashoffset: 241.85 }} // 65% offset (691 * 0.35)
+              animate={{ strokeDashoffset: 124.38 }} // 82% offset (691 * 0.18)
+              transition={{ duration: 2.5, ease: [0.25, 0.1, 0.25, 1] }} // easeOutQuart-like
               className="text-primary" 
               cx="128" cy="128" r="110" 
               fill="transparent" 
@@ -50,7 +78,7 @@ export default function ChargingScreen({ onStop }: ChargingScreenProps) {
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
             <span className="text-sm font-medium text-on-surface-variant tracking-wider uppercase">正在充电</span>
-            <h1 className="text-6xl font-extrabold tracking-tight text-on-surface">82%</h1>
+            <h1 className="text-6xl font-extrabold tracking-tight text-on-surface">{displayProgress}%</h1>
             <div className="mt-2 px-3 py-1 bg-secondary-fixed text-on-secondary-fixed text-xs font-bold rounded-full">
               剩余 15 分钟
             </div>
