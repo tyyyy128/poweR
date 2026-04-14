@@ -25,8 +25,8 @@ export default function StatusScreen({ onStartCharging, onOpenSettings, onFindSt
         <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden group shadow-2xl">
           <img 
             className="w-full h-full object-cover transform scale-110 -translate-x-4" 
-            src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=1000" 
-            alt="Vehicle"
+            src="https://images.unsplash.com/photo-1556122071-e404be7457cc?auto=format&fit=crop&q=80&w=1000" 
+            alt="Luxury Shuttle Bus"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
@@ -84,7 +84,7 @@ export default function StatusScreen({ onStartCharging, onOpenSettings, onFindSt
           <Zap className="text-on-surface-variant w-5 h-5" />
         </div>
         <p className="text-on-surface-variant leading-relaxed text-sm">
-          已连接至 <span className="font-semibold text-on-surface">Kinetic Hub #42</span>。准备好使用可持续能源为您的车辆补充能量。
+          已连接至 <span className="font-semibold text-on-surface">聚农智充站 #08</span>。准备好使用可持续能源为您的车辆补充能量。
         </p>
         <div className="space-y-3">
           <button 
