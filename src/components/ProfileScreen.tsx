@@ -15,7 +15,7 @@ export default function ProfileScreen() {
             <img 
               alt="User Profile" 
               className="w-full h-full rounded-full object-cover" 
-              src="https://img1.baidu.com/it/u=236967001,3134372935&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" 
+              src="https://img.pcauto.com.cn/images/upload/upc/tx/auto_bbs/1611/04/c0/29398246_1478230461618_800x600.jpg" 
               referrerPolicy="no-referrer"
             />
           </div>
