@@ -15,7 +15,7 @@ export default function ProfileScreen() {
             <img 
               alt="User Profile" 
               className="w-full h-full rounded-full object-cover" 
-              src="https://inews.gtimg.com/newsapp_bt/0/12171811551/1000" 
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200" 
               referrerPolicy="no-referrer"
             />
           </div>
