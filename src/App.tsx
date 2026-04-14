@@ -99,7 +99,7 @@ export default function App() {
         <div className="flex justify-between items-center px-6 h-16 w-full max-w-md mx-auto">
           <div className="flex items-center gap-2">
             <Zap className="text-primary w-6 h-6 fill-primary/20" />
-            <span className="text-lg font-bold tracking-tighter text-on-surface">Kinetic Energy</span>
+            <span className="text-lg font-bold tracking-tighter text-on-surface">聚农智充</span>
           </div>
           <button className="text-outline hover:text-primary transition-colors active:scale-95">
             <UserCircle className="w-6 h-6" />
