@@ -61,7 +61,7 @@ export default function SuccessScreen({ onDone }: SuccessScreenProps) {
       <div className="rounded-3xl overflow-hidden aspect-[16/10] bg-surface-container relative shadow-sm border border-outline-variant/5">
         <img 
           className="w-full h-full object-cover opacity-80" 
-          src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1000" 
+          src="https://img2.baidu.com/it/u=1814213382,3831861915&fm=253&fmt=auto&app=138&f=JPEG?w=1000&h=500" 
           alt="Sustainability"
           referrerPolicy="no-referrer"
         />

@@ -15,7 +15,7 @@ export default function ProfileScreen() {
             <img 
               alt="User Profile" 
               className="w-full h-full rounded-full object-cover" 
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200" 
+              src="https://img1.baidu.com/it/u=236967001,3134372935&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" 
               referrerPolicy="no-referrer"
             />
           </div>
