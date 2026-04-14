@@ -15,7 +15,7 @@ export default function ProfileScreen() {
             <img 
               alt="User Profile" 
               className="w-full h-full rounded-full object-cover" 
-              src="https://img.pcauto.com.cn/images/upload/upc/tx/auto_bbs/1611/04/c0/29398246_1478230461618_800x600.jpg" 
+              src="https://inews.gtimg.com/newsapp_bt/0/12171811551/1000" 
               referrerPolicy="no-referrer"
             />
           </div>
